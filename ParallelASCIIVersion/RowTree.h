@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "NodeObject.h"
 
 #define NUMVALUES 3
@@ -14,13 +15,13 @@ class RowTree
 		RowTree(int);
 		RowTree(RowTree*);
 
-		string* getPermutations();
+		vector<string> getPermutations();
 
 		~RowTree() = default;
 
 	private:
 		
-		NodeObject* RowList;
+		vector<NodeObject> RowList;
 		int level;
 		int len;
 };
@@ -30,16 +31,15 @@ RowTree::RowTree(int startingLetter) {
 	this->level = 2;
 	this->len = NUMVALUES;
 
-	RowList = new NodeObject[NUMVALUES];
-	for (int i = 0; i < (NUMVALUES); i++)
+	for (int i = 0; i < this->len; i++)
 	{
 		NodeObject* temp = new NodeObject;
-		int* temp2 = new int[2];
-		temp2[0] = startingLetter;
-		temp2[1] = i + startPoint;
+		vector<int> temp2;
+		temp2.push_back(startingLetter);
+		temp2.push_back(i + startPoint);
 		temp->setWord(temp2);
 
-		RowList[i] = *temp;
+		this->RowList.push_back(*temp);
 	}
 }
 
@@ -47,18 +47,18 @@ RowTree::RowTree(RowTree* prevRow) {
 	// length of previous * num of possible values
 	this->len = prevRow->len * NUMVALUES;
 	this->level = prevRow->level + 1;
-	this->RowList = new NodeObject[this->len];
+//	this->RowList = new NodeObject[this->len];
 
 	
-	for (int i = 0; i < prevRow->len; i++) {
+	for (int i = 0; i < prevRow->RowList.size(); i++) {
 		for (int j = 0; j < NUMVALUES; j++) {
 
 			NodeObject* temp = new NodeObject;
-			int* temp2 = new int[level];
-			int* temp3 = prevRow->RowList[i].getIntWord();
+			vector<int> temp2;
+			vector<int> temp3 = prevRow->RowList[i].getIntWord();
 			for (int k = 0; k < level-1; k++)
 			{
-				temp2[k] = temp3[k];
+				temp2.push_back(temp3[k]);
 			}
 			temp2[level - 1] = startPoint + j;
 			temp->setWord(temp2);
@@ -69,12 +69,12 @@ RowTree::RowTree(RowTree* prevRow) {
 
 }
 
-inline string* RowTree::getPermutations()
+inline vector<string> RowTree::getPermutations()
 {
-	string* Permutations = new string[this->len];
-	for (int i = 0; i < this->len; i++)
+	vector<string> Permutations;
+	for (int i = 0; i < this->RowList.size(); i++)
 	{
-		Permutations[i] = RowList[i].getWord();
+		Permutations.push_back(this->RowList[i].getWord());
 	}
 	return Permutations;
 }
