@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define NUMVALUES 3
+#define NUMVALUES 5
 #define startPoint 97
 
 int main()
@@ -37,7 +37,11 @@ int main()
 
 
 		string* permutations = currRow->getPermutations();
-		for (int i = 0; i < (wordLen - 1 * NUMVALUES); i++)
+		/*for (int i = 0; i < (wordLen - 1 * NUMVALUES); i++)
+		{
+			cout << permutations[i];
+		}*/
+		for (int i = 0; i < sizeof(*permutations); i++)
 		{
 			cout << permutations[i];
 		}

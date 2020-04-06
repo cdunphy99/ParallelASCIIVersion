@@ -27,8 +27,8 @@ class RowTree
 
 RowTree::RowTree(int startingLetter) {
 
-	int level = 2;
-	int len = NUMVALUES;
+	this->level = 2;
+	this->len = NUMVALUES;
 
 	RowList = new NodeObject[NUMVALUES];
 	for (int i = 0; i < (NUMVALUES); i++)

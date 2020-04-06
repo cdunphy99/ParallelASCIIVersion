@@ -18,7 +18,7 @@ private:
 
 string NodeObject::getWord() {
 	string toReturn;
-	for (int i = 0; i < len; i++) {
+	for (int i = 0; i < this->len; i++) {
 		toReturn += word[i];
 	}
 	return toReturn;
@@ -35,4 +35,5 @@ NodeObject::NodeObject(int* wordToStore) {
 
 void NodeObject::setWord(int* wordToStore) {
 	this->word = wordToStore;
+	this->len = sizeof(*wordToStore);
 }
