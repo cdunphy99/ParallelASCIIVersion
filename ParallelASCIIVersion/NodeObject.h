@@ -5,34 +5,32 @@ class NodeObject
 {
 public:
 	string getWord();
-	int* getIntWord();
-	NodeObject(int* wordToStore);
+	vector<int> getIntWord();
+	NodeObject(vector<int> wordToStore);
 	NodeObject() = default;
-	void setWord(int* wordToStore);
+	void setWord(vector<int> wordToStore);
 
 private:
-	int* word;
-	int len;
-
+	vector<int> word;
 };
 
 string NodeObject::getWord() {
 	string toReturn;
-	for (int i = 0; i < len; i++) {
+	for (int i = 0; i < word.size(); i++) {
 		toReturn += word[i];
 	}
+	cout << "Got word" << toReturn << "\n";
 	return toReturn;
 }
 
-int* NodeObject::getIntWord() {
+vector<int> NodeObject::getIntWord() {
 	return word;
 }
 
-NodeObject::NodeObject(int* wordToStore) {
+NodeObject::NodeObject(vector<int> wordToStore) {
 	this->word = wordToStore;
-	this->len = sizeof(*wordToStore);
 }
 
-void NodeObject::setWord(int* wordToStore) {
+void NodeObject::setWord(vector<int> wordToStore) {
 	this->word = wordToStore;
 }
