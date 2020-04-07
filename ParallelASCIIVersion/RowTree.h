@@ -2,7 +2,7 @@
 #include <string>
 #include "NodeObject.h"
 
-#define NUMVALUES 3
+#define NUMVALUES 26
 #define startPoint 97
 
 using namespace std;

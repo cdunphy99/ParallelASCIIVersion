@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define NUMVALUES 3
+#define NUMVALUES 26
 #define startPoint 97
 
 int main()
