@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <vector>
 #include "NodeObject.h"
 
 #define NUMVALUES 3
@@ -10,36 +9,37 @@ using namespace std;
 
 class RowTree
 {
-	public:
-		RowTree() = default;
-		RowTree(int);
-		RowTree(RowTree*);
+public:
+	RowTree() = default;
+	RowTree(int);
+	RowTree(RowTree*);
 
-		vector<string> getPermutations();
+	string* getPermutations();
 
-		~RowTree() = default;
+	~RowTree() = default;
 
-	private:
-		
-		vector<NodeObject> RowList;
-		int level;
-		int len;
+private:
+
+	NodeObject* RowList;
+	int level;
+	int len;
 };
 
 RowTree::RowTree(int startingLetter) {
 
-	int level = 2;
-	int len = NUMVALUES;
+	this->level = 2;
+	this->len = NUMVALUES;
 
-	for (int i = 0; i < this->len; i++)
+	RowList = new NodeObject[NUMVALUES];
+	for (int i = 0; i < (NUMVALUES); i++)
 	{
 		NodeObject* temp = new NodeObject;
-		vector<int> temp2;
-		temp2.push_back(startingLetter);
-		temp2.push_back(i + startPoint);
+		int* temp2 = new int[2];
+		temp2[0] = startingLetter;
+		temp2[1] = i + startPoint;
 		temp->setWord(temp2);
 
-		this->RowList.push_back(*temp);
+		RowList[i] = *temp;
 	}
 }
 
@@ -47,18 +47,18 @@ RowTree::RowTree(RowTree* prevRow) {
 	// length of previous * num of possible values
 	this->len = prevRow->len * NUMVALUES;
 	this->level = prevRow->level + 1;
-//	this->RowList = new NodeObject[this->len];
+	this->RowList = new NodeObject[this->len];
 
-	
-	for (int i = 0; i < prevRow->RowList.size(); i++) {
+
+	for (int i = 0; i < prevRow->len; i++) {
 		for (int j = 0; j < NUMVALUES; j++) {
 
 			NodeObject* temp = new NodeObject;
-			vector<int> temp2;
-			vector<int> temp3 = prevRow->RowList[i].getIntWord();
-			for (int k = 0; k < level-1; k++)
+			int* temp2 = new int[level];
+			int* temp3 = prevRow->RowList[i].getIntWord();
+			for (int k = 0; k < level - 1; k++)
 			{
-				temp2.push_back(temp3[k]);
+				temp2[k] = temp3[k];
 			}
 			temp2[level - 1] = startPoint + j;
 			temp->setWord(temp2);
@@ -69,12 +69,12 @@ RowTree::RowTree(RowTree* prevRow) {
 
 }
 
-inline vector<string> RowTree::getPermutations()
+inline string* RowTree::getPermutations()
 {
-	vector<string> Permutations;
-	for (int i = 0; i < this->RowList.size(); i++)
+	string* Permutations = new string[this->len];
+	for (int i = 0; i < this->len; i++)
 	{
-		Permutations.push_back(this->RowList[i].getWord());
+		Permutations[i] = RowList[i].getWord();
 	}
 	return Permutations;
 }
