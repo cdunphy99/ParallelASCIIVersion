@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define NUMVALUES 5
+#define NUMVALUES 3
 #define startPoint 97
 
 int main()
@@ -25,7 +25,7 @@ int main()
 		for (int j = 0; j < wordLen - 2; j++) // 2 have already been generated
 		{
 			if (j == 0) {
-				currRow = &RowTree(start);
+				currRow = &RowTree(&start);
 				cout << "FUCK";
 			}
 			else
@@ -37,13 +37,9 @@ int main()
 
 
 		string* permutations = currRow->getPermutations();
-		/*for (int i = 0; i < (wordLen - 1 * NUMVALUES); i++)
+		for (int i = 0; i < currRow->getLen(); i++)
 		{
-			cout << permutations[i];
-		}*/
-		for (int i = 0; i < sizeof(*permutations); i++)
-		{
-			cout << permutations[i];
+			cout << sizeof(*permutations) << permutations[i];
 		}
 
 
