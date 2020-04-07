@@ -22,7 +22,7 @@ int main()
 	{
 		RowTree* currRow = nullptr;
 		RowTree start(i + startPoint);
-		for (int j = 0; j < wordLen - 2; j++) // 2 have already been generated
+		for (int j = 0; j < wordLen; j++) // 2 have already been generated
 		{
 			if (j == 0) {
 				currRow = &RowTree(&start);

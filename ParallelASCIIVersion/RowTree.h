@@ -27,11 +27,11 @@ private:
 };
 
 RowTree::RowTree(int startingLetter) {
-	cout << "---" << len << "===="; // does not run this
+	cout << "---" << len << "====\n"; // does not run this
 
 	this->level = 2;
 	this->len = NUMVALUES;
-	cout << "---" << len << "====";
+	cout << "---" << len << "====\n";
 	RowList = new NodeObject[NUMVALUES];
 	for (int i = 0; i < (NUMVALUES); i++)
 	{
@@ -47,13 +47,14 @@ RowTree::RowTree(int startingLetter) {
 
 RowTree::RowTree(RowTree* prevRow) {
 	// length of previous * num of possible values
-	this->len = prevRow->len * NUMVALUES;
+	this->len = prevRow->getLen() * NUMVALUES;
+	cout << "RowTree prevRow constructor: updating len to " << prevRow->getLen() * NUMVALUES << "\n";
 	this->level = prevRow->level + 1;
 	this->RowList = new NodeObject[this->len];
-	cout << "FUCK"; // does not get here
+	cout << "FUCK\n"; // does not get here
 
 	for (int i = 0; i < prevRow->len; i++) {
-		cout << "FUCK"; // does not get here
+		cout << "FUCK\n"; // does not get here
 		for (int j = 0; j < NUMVALUES; j++) {
 
 			NodeObject* temp = new NodeObject;
@@ -78,6 +79,7 @@ inline string* RowTree::getPermutations()
 	for (int i = 0; i < this->len; i++)
 	{
 		Permutations[i] = RowList[i].getWord();
+		cout << "Added " << Permutations[i] << " to permutations list\n";
 	}
 	return Permutations;
 }

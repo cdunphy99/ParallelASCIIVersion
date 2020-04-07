@@ -30,10 +30,12 @@ int* NodeObject::getIntWord() {
 
 NodeObject::NodeObject(int* wordToStore) {
 	this->word = wordToStore;
+	cout << "NodeObject constructor: updating len to " << sizeof(*wordToStore) << "\n";
 	this->len = sizeof(*wordToStore);
 }
 
 void NodeObject::setWord(int* wordToStore) {
 	this->word = wordToStore;
+	cout << "NodeObject setWord(): updating len to " << sizeof(*wordToStore) << "\n";
 	this->len = sizeof(*wordToStore);
 }
