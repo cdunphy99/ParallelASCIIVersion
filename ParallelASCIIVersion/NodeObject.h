@@ -6,9 +6,9 @@ class NodeObject
 public:
 	string getWord();
 	int* getIntWord();
-	NodeObject(int* wordToStore);
+	NodeObject(int* wordToStore, int size);
 	NodeObject() = default;
-	void setWord(int* wordToStore);
+	void setWord(int* wordToStore, int size);
 
 private:
 	int* word;
@@ -28,12 +28,14 @@ int* NodeObject::getIntWord() {
 	return word;
 }
 
-NodeObject::NodeObject(int* wordToStore) {
+NodeObject::NodeObject(int* wordToStore, int size) {
 	this->word = wordToStore;
-	this->len = sizeof(*wordToStore);
+	cout << "NodeObject constructor: updating len to " << size << "\n";
+	this->len = size;
 }
 
-void NodeObject::setWord(int* wordToStore) {
+void NodeObject::setWord(int* wordToStore, int size) {
 	this->word = wordToStore;
-	this->len = sizeof(*wordToStore);
+	cout << "NodeObject setWord(): updating len to " << size << "\n";
+	this->len = size;
 }
