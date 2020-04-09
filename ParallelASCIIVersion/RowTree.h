@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "NodeObject.h"
 
-#define NUMVALUES 26
+#define NUMVALUES 3
 #define startPoint 97
 
 using namespace std;
@@ -11,31 +12,30 @@ class RowTree
 {
 public:
 	RowTree() = default;
-	RowTree(int);
+	RowTree(char);
 	RowTree(RowTree*);
 
-	string* getPermutations();
+	vector<string> getPermutations();
 	int getLen();
 
 	~RowTree() = default;
 
 private:
-
+	int len;
 	NodeObject* RowList;
 	int level;
-	int len;
 };
 
-RowTree::RowTree(int startingLetter) {
+RowTree::RowTree(char startingLetter) {
 	this->level = 2;
-	this->len = NUMVALUES;
-	RowList = new NodeObject[NUMVALUES];
-	for (int i = 0; i < (NUMVALUES); i++)
+	this->RowList = new NodeObject[NUMVALUES];
+	this->len = sizeof(char);
+	for (int i = 0; i < (NUMVALUES + 1); i++)
 	{
 		NodeObject* temp = new NodeObject;
-		int* temp2 = new int[2];
-		temp2[0] = startingLetter;
-		temp2[1] = i + startPoint;
+		string temp2 = "";
+		temp2 += startingLetter;
+		temp2 += i + startPoint;
 		temp->setWord(temp2);
 		RowList[i] = *temp;
 	}
@@ -51,11 +51,11 @@ RowTree::RowTree(RowTree* prevRow) {
 		for (int j = 0; j < NUMVALUES; j++) {
 
 			NodeObject* temp = new NodeObject;
-			int* temp2 = new int[level];
-			int* temp3 = prevRow->RowList[i].getIntWord();
+			string temp2;
+			string temp3 = prevRow->RowList[i].getWord();
 			for (int k = 0; k < level - 1; k++)
 			{
-				temp2[k] = temp3[k];
+				temp2 += temp3[k];
 			}
 			temp2[level - 1] = startPoint + j;
 			temp->setWord(temp2);
@@ -65,12 +65,12 @@ RowTree::RowTree(RowTree* prevRow) {
 	}
 }
 
-inline string* RowTree::getPermutations()
+inline vector<string> RowTree::getPermutations()
 {
-	string* Permutations = new string[this->len];
+	vector<string> Permutations;
 	for (int i = 0; i < this->len; i++)
 	{
-		Permutations[i] = RowList[i].getWord();
+		Permutations.push_back(RowList[i].getWord());
 	}
 	return Permutations;
 }

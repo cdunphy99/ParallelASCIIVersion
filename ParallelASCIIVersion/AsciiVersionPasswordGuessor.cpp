@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define NUMVALUES 26
+#define NUMVALUES 3
 #define startPoint 97
 
 int main()
@@ -22,7 +22,7 @@ int main()
 	{
 		RowTree* currRow = nullptr;
 		RowTree start(i + startPoint);
-		for (int j = 0; j < wordLen - 2; j++) // 2 have already been generated
+		for (int j = 0; j < wordLen; j++) // 2 have already been generated
 		{
 			if (j == 0) {
 				currRow = &RowTree(&start);
@@ -35,10 +35,10 @@ int main()
 
 
 
-		string* permutations = currRow->getPermutations();
-		for (int i = 0; i < currRow->getLen(); i++)
+		vector<string> permutations = currRow->getPermutations();
+		for (auto i : permutations)
 		{
-			cout << permutations[i];
+			cout << i << "   ";
 		}
 
 
