@@ -139,9 +139,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AsciiVersionPasswordGuessor.cpp" />
+    <ClCompile Include="permutations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NodeObject.h" />
+    <ClInclude Include="permutations.h" />
     <ClInclude Include="RowTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,48 +1,20 @@
 #include <iostream>
-#include "RowTree.h"
+#include <vector>
+#include "permutations.h"
 
 using namespace std;
 
-#define NUMVALUES 26
-#define startPoint 97
 
 int main()
 {
-	int wordLen;
+	cout << "Enter password: ";
 	string wordCheck;
-
-	cout << "Enter the Password: ";
 	cin >> wordCheck;
-	wordLen = wordCheck.length();
-
-
-
-
-	for (int i = 0; i < NUMVALUES; i++)
-	{
-		RowTree* currRow = nullptr;
-		RowTree start(i + startPoint);
-		for (int j = 0; j < wordLen - 2; j++) // 2 have already been generated
-		{
-			if (j == 0) {
-				currRow = &RowTree(&start);
-			}
-			else
-			{
-				currRow = &RowTree(currRow);
-			}
-		}
-
-
-
-		string* permutations = currRow->getPermutations();
-		for (int i = 0; i < currRow->getLen(); i++)
-		{
-			cout << permutations[i];
-		}
-
-
+	permutations permObject;
+	vector<string> permutations;
+	permutations = permObject.getPermutations(wordCheck, wordCheck.length());
+	for (auto i : permutations) {
+		cout << i << "  ";
 	}
-
 	return 0;
 }
